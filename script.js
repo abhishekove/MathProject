@@ -1,5 +1,11 @@
 const canvas=document.querySelector("canvas");
 
+var star=document.getElementById("1but")
+var reset=document.getElementById("2but")
+
+var k=true;
+
+
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
@@ -10,9 +16,9 @@ let balls=0
 
 weight=[]
 
-weight.push([])
+// weight.push([])
 
-weight[0].push(36)
+// weight[0].push(36)
 
 for (let i = 0; i < balls; i++) {
   bubleCord.push({
@@ -21,19 +27,52 @@ for (let i = 0; i < balls; i++) {
   });
 }
 
+star.addEventListener("click",function(e){
+  console.log("Hello");
+  k=false;
 
+weight=new Array(bubleCord.length);
+for (var i = 0; i < bubleCord.length; i++) {
+  weight[i]=new Array(bubleCord.length);
+}
+for (var i = 0; i < bubleCord.length; i++) {
+  for (var j = 0; j < weight[i].length; j++) {
+    weight[i][j]=prompt("Check");
+  }
+}
 
-window.addEventListener("mousedown",function(e){
-bubleCord.push({
-  x:e.x,
-  y:e.y
-});
-// bubleCord.push(mouse);
-draw();
+console.log(weight);
 
 })
 
-console.log(weight);
+reset.addEventListener("click",function(e){
+  console.log("reset");
+  k=true;
+
+
+setTimeout(function(){c.clearRect(0,0,window.innerWidth,window.innerHeight);
+bubleCord=[]},500)
+})
+
+window.addEventListener("mousedown",function(e){
+
+setTimeout(function(){
+
+  if (k) {
+  bubleCord.push({
+    x:e.x,
+    y:e.y
+  });
+draw();
+}},500)
+
+
+// bubleCord.push(mouse);
+
+
+})
+
+// console.log(weight);
 
 function draw(){
 
