@@ -1,4 +1,4 @@
-const canvas=document.querySelector("canvas");
+const canvas=document.querySelector("svg");
 
 var star=document.getElementById("1but")
 var reset=document.getElementById("2but")
@@ -9,7 +9,7 @@ var k=true;
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
-let c=canvas.getContext("2d");
+// let c=canvas.getContext("2d");
 
 let bubleCord=[]
 let balls=0
@@ -37,11 +37,37 @@ for (var i = 0; i < bubleCord.length; i++) {
 }
 for (var i = 0; i < bubleCord.length; i++) {
   for (var j = 0; j < weight[i].length; j++) {
-    weight[i][j]=prompt("Check");
+    weight[i][j]=prompt("Value for "+i+','+j);
   }
 }
 
 console.log(weight);
+
+
+
+
+  for (let i = 0; i < bubleCord.length; i++) {
+    let l1= bubleCord[i];
+    // c.beginPath();
+    // c.moveTo(l1.x,l1.y);
+    for (let j = 0; j < bubleCord.length; j++) {
+      let l2=bubleCord[j];
+      if (weight[i][j])
+      {
+        let sv=document.createElementNS("http://www.w3.org/2000/svg", 'line')
+        sv.setAttribute('x1',l1.x)
+        sv.setAttribute('y1',l1.y)
+        sv.setAttribute('x2',l2.x)
+        sv.setAttribute('y2',l2.y)
+        sv.setAttribute('style','stroke:rgb(0,0,0);stroke-width:2')
+        canvas.appendChild(sv)
+        // c.lineTo(l2.x,l2.y);
+        // console.log(c.stroke());
+      }
+    }
+
+  }
+
 
 })
 
@@ -80,24 +106,28 @@ function draw(){
 
   for (let i = 0; i < bubleCord.length; i++) {
     let buble=bubleCord[i];
-c.beginPath();
-    c.arc(buble.x,buble.y,5,0,Math.PI*2,false);
-    c.stroke();
-    c.fill();
+    let sv=document.createElementNS("http://www.w3.org/2000/svg", 'circle')
+    sv.setAttribute('cx',buble.x)
+    sv.setAttribute('cy',buble.y)
+    sv.setAttribute('r','6')
+    sv.setAttribute('stroke-width','3')
+    sv.setAttribute('stroke','black')
+    sv.setAttribute('fill','black')
+    canvas.appendChild(sv)
   }
 
-
-c.beginPath();
-  for (let i = 0; i < bubleCord.length; i++) {
-    let l1= bubleCord[i];
-    c.moveTo(l1.x,l1.y);
-    for (let j = 0; j < bubleCord.length; j++) {
-      let l2=bubleCord[j];
-      c.lineTo(l2.x,l2.y);
-      c.stroke();
-    }
-
-  }
+//
+// c.beginPath();
+//   for (let i = 0; i < bubleCord.length; i++) {
+//     let l1= bubleCord[i];
+//     c.moveTo(l1.x,l1.y);
+//     for (let j = 0; j < bubleCord.length; j++) {
+//       let l2=bubleCord[j];
+//       c.lineTo(l2.x,l2.y);
+//       c.stroke();
+//     }
+//
+//   }
 
 
 }
