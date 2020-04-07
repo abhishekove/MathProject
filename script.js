@@ -75,7 +75,19 @@ console.log(djp);
   dj.pop()
   // console.log(tem);
   }
-  console.log(djp);
+  // console.log(djp);
+  for (var i = 0; i < djp.length; i++) {
+
+    let sv=document.createElementNS("http://www.w3.org/2000/svg", 'line')
+    let l1=bubleCord[djp[i].vertex]
+    let l2=bubleCord[djp[i].prev]
+    sv.setAttribute('x1',l1.x)
+    sv.setAttribute('y1',l1.y)
+    sv.setAttribute('x2',l2.x)
+    sv.setAttribute('y2',l2.y)
+    sv.setAttribute('style','stroke:rgb(255,0,0);stroke-width:2')
+    canvas.appendChild(sv)
+  }
 }
 
 for (let i = 0; i < balls; i++) {
@@ -108,7 +120,7 @@ for (var i = 0; i < bubleCord.length; i++) {
 
 // console.log(weight);
 
-dijkstra()
+
 
 
   for (let i = 0; i < bubleCord.length; i++) {
@@ -131,7 +143,7 @@ dijkstra()
 
   }
 
-
+dijkstra()
 })
 
 reset.addEventListener("click",function(e){
