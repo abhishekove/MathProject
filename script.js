@@ -184,11 +184,19 @@ function draw(){
     let sv=document.createElementNS("http://www.w3.org/2000/svg", 'circle')
     sv.setAttribute('cx',buble.x)
     sv.setAttribute('cy',buble.y)
-    sv.setAttribute('r','6')
+    sv.setAttribute('r','13')
     sv.setAttribute('stroke-width','3')
     sv.setAttribute('stroke','black')
     sv.setAttribute('fill','black')
     canvas.appendChild(sv)
+    let te=document.createElementNS("http://www.w3.org/2000/svg", 'text')
+    te.setAttribute('x',buble.x)
+    te.setAttribute('y',buble.y)
+    te.setAttribute('text-anchor','middle')
+    te.setAttribute('stroke','white')
+    te.setAttribute('stroke-width','1px')
+    te.innerHTML=i;
+    canvas.appendChild(te)
   }
 
 //
