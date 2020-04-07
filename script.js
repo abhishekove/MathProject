@@ -87,6 +87,27 @@ console.log(djp);
     sv.setAttribute('y2',l2.y)
     sv.setAttribute('style','stroke:rgb(255,0,0);stroke-width:2')
     canvas.appendChild(sv)
+    // let te=document.createElementNS("http://www.w3.org/2000/svg", 'text')
+    // te.setAttribute('x',(l1.x+l2.x)/2)
+    // te.setAttribute('y',(l1.y+l2.y)/2)
+    // te.setAttribute('text-anchor','middle')
+    // te.setAttribute('stroke','#000066')
+    // te.setAttribute('stroke-width','1px')
+    // te.innerHTML=weight[djp[i].vertex][djp[i].prev];
+    // canvas.appendChild(te)
+
+  }
+
+  for (let i = 0; i < bubleCord.length; i++) {
+    let buble=bubleCord[i];
+    let te=document.createElementNS("http://www.w3.org/2000/svg", 'text')
+    te.setAttribute('x',buble.x)
+    te.setAttribute('y',buble.y)
+    te.setAttribute('text-anchor','middle')
+    te.setAttribute('stroke','white')
+    te.setAttribute('stroke-width','1px')
+    te.innerHTML=i;
+    canvas.appendChild(te)
   }
 }
 
@@ -98,7 +119,7 @@ for (let i = 0; i < balls; i++) {
 }
 
 star.addEventListener("click",function(e){
-  console.log("Hello");
+  // console.log("Hello");
   k=false;
 
 weight=new Array(bubleCord.length);
@@ -138,6 +159,15 @@ for (var i = 0; i < bubleCord.length; i++) {
         sv.setAttribute('y2',l2.y)
         sv.setAttribute('style','stroke:rgb(0,0,0);stroke-width:2')
         canvas.appendChild(sv)
+
+        let te=document.createElementNS("http://www.w3.org/2000/svg", 'text')
+        te.setAttribute('x',(l1.x+l2.x)/2)
+        te.setAttribute('y',(l1.y+l2.y)/2)
+        te.setAttribute('text-anchor','middle')
+        te.setAttribute('stroke','#000066')
+        te.setAttribute('stroke-width','2px')
+        te.innerHTML=weight[i][j];
+        canvas.appendChild(te)
       }
     }
 
@@ -147,12 +177,20 @@ dijkstra()
 })
 
 reset.addEventListener("click",function(e){
-  console.log("reset");
+  // console.log("reset");
   k=true;
 
+setTimeout(function(){
+  bubleCord=[]
+  dj=[]
+  djp=[]
+  weight=[]
+},500)
 
-setTimeout(function(){c.clearRect(0,0,window.innerWidth,window.innerHeight);
-bubleCord=[]},500)
+while (canvas.lastChild) {
+  canvas.removeChild(canvas.lastChild)
+}
+
 })
 
 window.addEventListener("mousedown",function(e){
