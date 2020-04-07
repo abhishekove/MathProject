@@ -14,11 +14,69 @@ canvas.height=window.innerHeight;
 let bubleCord=[]
 let balls=0
 
+dj=[]
+djp=[]
 weight=[]
 
 // weight.push([])
 
 // weight[0].push(36)
+
+function minin(arr) {
+mi=0
+for (var i = 0; i < arr.length; i++) {
+  if (arr[mi].weigh>arr[i].weigh) {
+    mi=i;
+  }
+}
+return mi;
+}
+
+function dijkstra() {
+  for (var i = 0; i < bubleCord.length; i++) {
+    dj.push({
+      vertex:i,
+      weigh:20000000,
+      prev:'',
+    })
+  }
+  // console.log(dj);
+  for (var i = 0; i < weight[0].length; i++) {
+    if (i==0) {
+      dj[i].weigh=weight[0][i]
+      dj[i].prev=0
+    }
+    if (weight[0][i]!=0) {
+      dj[i].weigh=weight[0][i]
+      dj[i].prev=0
+    }
+  }
+
+// console.log(dj);
+djp.push(dj[0])
+delete dj[0]
+dj.sort()
+dj.pop()
+console.log(dj);
+console.log(djp);
+  while (dj.length!=0) {
+  let tem=dj[minin(dj)]
+  for (var i = 0; i < dj.length; i++) {
+    if (weight[tem.vertex][dj[i].vertex]) {
+      if (dj[i].weigh>(tem.weigh+weight[tem.vertex][dj[i].vertex])) {
+        dj[i].weigh=tem.weigh+weight[tem.vertex][dj[i].vertex]
+        dj[i].prev=tem.vertex
+      }
+    }
+  }
+  djp.push(tem)
+  delete dj[dj.indexOf(tem)]
+  dj.sort()
+  dj.pop()
+  // console.log(tem);
+  }
+  console.log(djp);
+}
 
 for (let i = 0; i < balls; i++) {
   bubleCord.push({
@@ -36,21 +94,28 @@ for (var i = 0; i < bubleCord.length; i++) {
   weight[i]=new Array(bubleCord.length);
 }
 for (var i = 0; i < bubleCord.length; i++) {
-  for (var j = 0; j < weight[i].length; j++) {
-    weight[i][j]=prompt("Value for "+i+','+j);
+  for (var j = i; j < weight[i].length; j++) {
+    if (i!=j) {
+      weight[i][j]=parseInt(prompt("Value for "+i+','+j));
+      weight[j][i]=weight[i][j]
+    }
+    else {
+      weight[i][j]=0
+      weight[j][i]=0
+    }
   }
 }
 
-console.log(weight);
+// console.log(weight);
 
-
+dijkstra()
 
 
   for (let i = 0; i < bubleCord.length; i++) {
     let l1= bubleCord[i];
     // c.beginPath();
     // c.moveTo(l1.x,l1.y);
-    for (let j = 0; j < bubleCord.length; j++) {
+    for (let j = i; j < bubleCord.length; j++) {
       let l2=bubleCord[j];
       if (weight[i][j])
       {
@@ -61,8 +126,6 @@ console.log(weight);
         sv.setAttribute('y2',l2.y)
         sv.setAttribute('style','stroke:rgb(0,0,0);stroke-width:2')
         canvas.appendChild(sv)
-        // c.lineTo(l2.x,l2.y);
-        // console.log(c.stroke());
       }
     }
 
